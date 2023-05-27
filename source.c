@@ -4,7 +4,7 @@ enum layer_names {
     _COLEMAK,
     _FN_MEDIA_COPY_PRINT,
     _NAVIGATION_LAYER
-}
+};
 
 static void render_logo(void) {
     static const char PROGMEM qmk_logo[] = {
