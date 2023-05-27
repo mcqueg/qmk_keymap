@@ -32,7 +32,7 @@ bool oled_task_user(void) {
                 case _COLEMAK:
                     oled_write_P(PSTR("Colemak\n"), false);
                     break;
-                case _FN_MEDIA_COPY_PRINT,:
+                case _FN_MEDIA_COPY_PRINT:
                     oled_write_P(PSTR("Fn Media Copy/Pase\n"), false);
                     break;
                 case _NAVIGATION_LAYER:
