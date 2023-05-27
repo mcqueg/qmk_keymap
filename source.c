@@ -1,5 +1,25 @@
 #include QMK_KEYBOARD_H
 
+
+
+enum layer_names {
+    _COLEMAK,
+    _FN_MEDIA_COPY_PRINT,
+    _NAVIGATION_LAYER
+};
+
+void os_user_config_update(void) {
+  if (user_config.os_is_mac) {
+    keymap_config.swap_lctl_lgui = false;
+    keymap_config.swap_rctl_rgui = false;
+  } else {
+    keymap_config.swap_lctl_lgui = true;
+    keymap_config.swap_rctl_rgui = true;
+  }
+  // this will immediately apply the new settings
+  keymap_config.raw = eeconfig_read_keymap();
+}
+
 static void render_logo(void) {
     static const char PROGMEM qmk_logo[] = {
         0x80, 0x81, 0x82, 0x83, 0x84, 0x85, 0x86, 0x87, 0x88, 0x89, 0x8A, 0x8B, 0x8C, 0x8D, 0x8E, 0x8F, 0x90, 0x91, 0x92, 0x93, 0x94,
@@ -20,9 +40,26 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
 
 bool oled_task_user(void) {
     if (is_keyboard_master()) {
-        render_logo();  // Renders a static logo
-        oled_scroll_left(); // Turns on scrolling
-        
+            // Host Keyboard Layer Status
+            oled_write_P(PSTR("Layer: "), false);
+            switch (get_highest_layer(layer_state)) {
+                case _COLEMAK:
+                    oled_write_P(PSTR("Colemak\n"), false);
+                    break;
+                case _FN_MEDIA_COPY_PRINT,:
+                    oled_write_P(PSTR("Fn Media Copy/Pase\n"), false);
+                    break;
+                case _NAVIGATION_LAYER:
+                    oled_write_P(PSTR("Navigation\n"), false);
+                    break;
+                default:
+                    // Or use the write_ln shortcut over adding '\n' to the end of your string
+                    oled_write_ln_P(PSTR("Undefined"), false);
+        }
+        // Host Keyboard WPM status
+        char wpm_str[10];
+        sprintf(wpm_str, "WPM: %03d", get_current_wpm());
+        oled_write(wpm_str, false);
     } else {
         render_logo();  // Renders a static logo
         oled_scroll_left();  // Turns on scrolling
