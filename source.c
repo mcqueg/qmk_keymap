@@ -43,9 +43,7 @@ bool oled_task_user(void) {
                     oled_write_ln_P(PSTR("Undefined"), false);
         }
         // Host Keyboard WPM status
-        char wpm_str[10];
-        sprintf(wpm_str, "WPM: %03d", get_current_wpm(void));
-        oled_write(wpm_str, false);
+        oled_write(uint8_t get_current_wpm(void));
     } else {
         render_logo();  // Renders a static logo
         oled_scroll_left();  // Turns on scrolling
