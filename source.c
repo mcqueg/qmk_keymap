@@ -1,23 +1,9 @@
 #include QMK_KEYBOARD_H
 
-
-
 enum layer_names {
     _COLEMAK,
     _FN_MEDIA_COPY_PRINT,
     _NAVIGATION_LAYER
-};
-
-void os_user_config_update(void) {
-  if (user_config.os_is_mac) {
-    keymap_config.swap_lctl_lgui = false;
-    keymap_config.swap_rctl_rgui = false;
-  } else {
-    keymap_config.swap_lctl_lgui = true;
-    keymap_config.swap_rctl_rgui = true;
-  }
-  // this will immediately apply the new settings
-  keymap_config.raw = eeconfig_read_keymap();
 }
 
 static void render_logo(void) {
