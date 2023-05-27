@@ -17,6 +17,7 @@ static void render_logo(void) {
 
 
 #ifdef OLED_ENABLE
+#include <stdio.h>
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
     if (!is_keyboard_master()) {
         return OLED_ROTATION_180;  // flips the display 180 degrees if offhand
