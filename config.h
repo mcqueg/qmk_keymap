@@ -1,0 +1,1 @@
+#define OLED_BRIGHTNESS 255
