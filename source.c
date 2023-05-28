@@ -9,12 +9,12 @@ enum layer_names {
 
 #ifdef OLED_ENABLE
 #include <stdio.h>
-// oled_rotation_t oled_init_user(oled_rotation_t rotation) {
-//     if (!is_keyboard_master()) {
-//         return OLED_ROTATION_180;  // flips the display 180 degrees if offhand
-//     }
-//     return rotation;
-// }
+oled_rotation_t oled_init_user(oled_rotation_t rotation) {
+    if (!is_keyboard_master()) {
+        return OLED_ROTATION_180;  // flips the display 180 degrees if offhand
+    }
+    return rotation;
+}
  
 // Lily58 pro logo
 static void render_logo(void) {
@@ -273,7 +273,7 @@ static void render_space(void) {
 // End of space oled stuff
 
 bool oled_task_user(void) {
-    if (is_keyboard_master()) {
+    if (!is_keyboard_master()) {
         render_space(); // Call this to render the space stuff on the one screen
         // // Host Keyboard Layer Status not working
         // oled_write_P(PSTR("Layer: "), false);
