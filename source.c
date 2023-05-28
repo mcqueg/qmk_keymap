@@ -274,8 +274,8 @@ static void render_space(void) {
 
 bool oled_task_user(void) {
     if (is_keyboard_master()) {
-        render_logo(); // Display generic Lily58 Pro logo
-        // // Host Keyboard Layer Status
+        render_space(); // Call this to render the space stuff on the one screen
+        // // Host Keyboard Layer Status not working
         // oled_write_P(PSTR("Layer: "), false);
         // switch (get_highest_layer(layer_state)) {
         //     case _COLEMAK:
@@ -297,9 +297,8 @@ bool oled_task_user(void) {
         // sprintf(str, "%d", wpm); // Writes the integer to str as a string
         // oled_write_ln_P(str, false); // display on oled
     } else {
-        //render_logo();  // Renders a static logo
-        //oled_scroll_left();  // Turns on scrolling
-        render_space(); // Call this to render the space stuff on the one screen
+        render_logo(); // Display generic Lily58 Pro logo
+        
     }
     return false;
 }
